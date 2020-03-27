@@ -25,6 +25,22 @@ class _HomeState extends State<Home> {
         ],
       ),
 
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+
+            new UserAccountsDrawerHeader(
+                accountName: new Text("Dhiraj Jain"),
+                accountEmail: new Text("dhirajj75@gmail.com"),
+
+              decoration: new BoxDecoration(
+                color: Colors.deepOrange
+              ),
+            )
+
+          ],
+        ),
+      ),
     );
   }
 }
