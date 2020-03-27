@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  List<MaterialColor> _color = [Colors.deepOrange, Colors.green, Colors.purple,Colors.red, Colors.amber];
 
   Future<List<Data>> getAllData() async{
 
@@ -132,9 +133,11 @@ class _HomeState extends State<Home> {
                       itemCount: snapshot.data.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext c, int index){
+                        MaterialColor mcolor = _color[index % _color.length];
                         return Card(
                           elevation: 10.0,
                           child: new Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
 
                               new Image.network(snapshot.data[index].url,
@@ -144,6 +147,40 @@ class _HomeState extends State<Home> {
                                 fit: BoxFit.cover,
                               ),
 
+                              new SizedBox(height: 7.0,),
+                              
+                              new Container(
+                                margin: EdgeInsets.all(6.0),
+                                height: 50.0,
+                                child: new Row(
+                                  children: <Widget>[
+
+                                    new Container(
+                                      child: new CircleAvatar(
+                                        child: new Text(snapshot.data[index].id.toString()),
+                                        backgroundColor: mcolor,
+                                        foregroundColor: Colors.white,
+                                      ),
+                                    ),
+
+
+                                    new SizedBox(
+                                      width: 6.0,
+                                    ),
+
+                                    new Container(
+                                      width: 80.0,
+                                      child: new Text(snapshot.data[index].title,
+                                      maxLines: 1,
+                                        style: TextStyle(
+                                          color: Colors.deepOrange
+                                        ),
+                                      ),
+                                    )
+
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         );
@@ -153,6 +190,77 @@ class _HomeState extends State<Home> {
               }
               ),
             ),
+
+            new SizedBox(height: 7.0,),
+
+          new Container(
+            margin: EdgeInsets.all(10.0),
+            height: MediaQuery.of(context).size.height,
+            child: new FutureBuilder(
+              future: getAllData(),
+              builder: (BuildContext c, AsyncSnapshot snapshot){
+
+                if(snapshot.data == null){
+                  return Center(
+                    child: new Text("Loading Data"),
+                  );
+                }else{
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext c, int index){
+                        MaterialColor mcolor = _color[index % _color.length];
+                        return Card(
+                          elevation: 7.0,
+                          child: Container(
+                            height: 80.0,
+                            child: new Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+
+                                new Expanded(
+                                  flex: 1,
+                                  child: new Image.network(
+                                      snapshot.data[index].thumbnailUrl,
+                                      height: 100.0,
+                                      fit: BoxFit.cover
+                                  ),
+                                ),
+
+                                new SizedBox(width: 6.0),
+                                new Expanded(
+                                  flex: 2,
+                                  child: new Text(
+                                    snapshot.data[index].title,
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
+
+                                new Expanded(
+                                  flex: 1,
+                                  child: Align(
+                                    child: CircleAvatar(
+                                      child: new Text(snapshot.data[index].id.toString()),
+                                      backgroundColor: mcolor,
+                                      foregroundColor: Colors.white,
+                                    ),
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                  );
+                }
+
+              },
+            ),
+          ),
+
         ],
       ),
     );
