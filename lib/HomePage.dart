@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'model/Data.dart';
+import 'DetailPage.dart';
 
 
 class Home extends StatefulWidget {
@@ -229,12 +230,18 @@ class _HomeState extends State<Home> {
                                 new SizedBox(width: 6.0),
                                 new Expanded(
                                   flex: 2,
-                                  child: new Text(
-                                    snapshot.data[index].title,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                      fontSize: 16.0,
+                                  child: InkWell(
+                                    child: new Text(
+                                      snapshot.data[index].title,
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                      ),
                                     ),
+                                    onTap: (){
+                                      Navigator.of(context).push(
+                                          new MaterialPageRoute(builder: (BuildContext c)=>Detail(snapshot.data[index])));
+                                    }
                                   ),
                                 ),
 
