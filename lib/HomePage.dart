@@ -36,8 +36,51 @@ class _HomeState extends State<Home> {
               decoration: new BoxDecoration(
                 color: Colors.deepOrange
               ),
-            )
+            ),
 
+            new ListTile(
+              title: new Text("First Page"),
+              leading: new Icon(Icons.search, color: Colors.orange,),
+              onTap: (){
+                Navigator.of(context).pop();
+              },
+            ),
+
+            new ListTile(
+              title: new Text("Second Page"),
+              leading: new Icon(Icons.add, color: Colors.red,),
+              onTap: (){
+                Navigator.of(context).pop();
+              },
+            ),
+
+            new ListTile(
+              title: new Text("Third Page"),
+              leading: new Icon(Icons.title, color: Colors.purple,),
+              onTap: (){
+                Navigator.of(context).pop();
+              },
+            ),
+
+            new ListTile(
+              title: new Text("Fourth Page"),
+              leading: new Icon(Icons.list, color: Colors.green,),
+              onTap: (){
+                Navigator.of(context).pop();
+              },
+            ),
+
+            new Divider(
+              height: 5.0,
+            ),
+
+            new ListTile(
+              title: new Text("Close"),
+              leading: new Icon(Icons.close),
+              onTap: (){
+                Navigator.of(context).pop();
+              },
+            ),
           ],
         ),
       ),
