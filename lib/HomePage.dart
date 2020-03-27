@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   @override
@@ -76,7 +77,7 @@ class _HomeState extends State<Home> {
 
             new ListTile(
               title: new Text("Close"),
-              leading: new Icon(Icons.close),
+              leading: new Icon(Icons.close, color: Colors.deepOrange),
               onTap: (){
                 Navigator.of(context).pop();
               },
