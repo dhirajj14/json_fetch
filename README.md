@@ -1,4 +1,4 @@
-# json_fetch
+# JSON Fetch Flutter Application
 
 A new Flutter application.
 
